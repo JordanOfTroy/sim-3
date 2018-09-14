@@ -1,4 +1,5 @@
 import React, {Component} from 'react' 
+import axios from 'axios'
 
 class Auth extends Component {
 
@@ -10,12 +11,20 @@ class Auth extends Component {
       password: ''
     }
     this.handelInput = this.handelInput.bind(this)
+    this.login = this.login.bind(this)
   }
 
   handelInput (e) {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  login () {
+    let {username, password} = this.state
+    console.log(username, password)
+    axios.post(`/api/login`, {username: username, password: password})
+    
   }
 
   render () {
@@ -38,7 +47,9 @@ class Auth extends Component {
           type="text"/>
         </div>
         <div>
-          <button>Login, My Dude!</button>
+          <button
+            onClick = {this.login}
+          >Login, My Dude!</button>
           <button>Register Bro!</button>
         </div>
       </div>

@@ -2,11 +2,12 @@ require('dotenv').config()
 const express = require('express'),
       session = require('express-session'),
       axios = require('axios'),
-      massive = require('massive')
+      massive = require('massive'),
+      ctrl = require('./controller'),
       app = express()
 
 const {
-PORT,
+SERVER_PORT,
 SESSION_SECRET
 } = process.env
 
@@ -18,11 +19,15 @@ app.use(session({
   saveUninitialized: false
 }))
 
+app.use(express.json())
 
 //endpoints will go here
+/***************************************** */
 
+app.post(`/api/login`, ctrl.login)
 
+/***************************************** */
 
-app.listen(PORT, () => {
-  console.log(`There's a party goin' down on ${PORT}`)
+app.listen(SERVER_PORT, () => {
+  console.log(`There's a party goin' down on ${SERVER_PORT}`)
 })
