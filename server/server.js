@@ -8,10 +8,11 @@ const express = require('express'),
 
 const {
 SERVER_PORT,
-SESSION_SECRET
+SESSION_SECRET,
+CONNECTION_STRING
 } = process.env
 
-//run massive here
+massive(CONNECTION_STRING).then(db => app.set('db', db))
 
 app.use(session({
   secret: SESSION_SECRET,
